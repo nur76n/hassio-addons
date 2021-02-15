@@ -3,9 +3,9 @@
 # SIGTERM-handler this funciton will be executed when the container receives the SIGTERM signal (when stopping)
 term_handler(){
 	echo "Stopping..."
-	ifdown wlan0
-	ip link set wlan0 down
-	ip addr flush dev wlan0
+	ifdown wlx503eaad8f29f
+	ip link set wlx503eaad8f29f down
+	ip addr flush dev wlx503eaad8f29f
 	exit 0
 }
 
@@ -15,7 +15,7 @@ trap 'term_handler' SIGTERM
 echo "Starting..."
 
 echo "Set nmcli managed no"
-nmcli dev set wlan0 managed no
+nmcli dev set wlx503eaad8f29f managed no
 
 CONFIG_PATH=/data/options.json
 
@@ -48,17 +48,17 @@ echo "channel=$CHANNEL"$'\n' >> /hostapd.conf
 # Setup interface
 echo "Setup interface ..."
 
-#ip link set wlan0 down
-#ip addr flush dev wlan0
-#ip addr add ${IP_ADDRESS}/24 dev wlan0
-#ip link set wlan0 up
+#ip link set wlx503eaad8f29f down
+#ip addr flush dev wlx503eaad8f29f
+#ip addr add ${IP_ADDRESS}/24 dev wlx503eaad8f29f
+#ip link set wlx503eaad8f29f up
 
 echo "address $ADDRESS"$'\n' >> /etc/network/interfaces
 echo "netmask $NETMASK"$'\n' >> /etc/network/interfaces
 echo "broadcast $BROADCAST"$'\n' >> /etc/network/interfaces
 
-ifdown wlan0
-ifup wlan0
+ifdown wlx503eaad8f29f
+ifup wlx503eaad8f29f
 
 echo "Starting HostAP daemon ..."
 hostapd -d /hostapd.conf & wait ${!}
